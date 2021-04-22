@@ -1,4 +1,4 @@
 # Other
-Other files
+A bit of a box where I put "non-project" related things that I want to share.
 
-In here I will be throwing programs and other things not related with my work or courses. Most of the things I program for fun or for other things.
+In here you can find programs made in Python, C, etc.
