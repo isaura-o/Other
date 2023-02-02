@@ -1,0 +1,122 @@
+%\documentclass[a4paper,12pt,twocolumn]{article}
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper]{geometry}
+\geometry{top=1.0in, bottom=1.0in, left=1.0in, right=0.5in}
+
+%deseleccionar els que vulguem utilitzar.
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{amsfonts}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{latexsym}
+%\usepackage[catalan]{babel}
+\usepackage[british,UKenglish,USenglish,english,american]{babel}
+%\usepackage{float}
+
+%per incloure figures
+\usepackage{epsfig}
+\usepackage{float}
+%\usepackage{srcltx}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{setspace,caption,subcaption}
+
+% double-spaced float captions
+\captionsetup{font=doublespacing}
+%\usepackage{titling}
+
+%bibliography
+\usepackage{cite}
+\usepackage[numbers]{natbib}
+\bibliographystyle{IEEEtran}
+
+% numera sol els apartats, en lletres romanes minuscules
+% sense cursiva, alineant be
+\newenvironment{apartats}{%
+  \renewcommand{\theenumi}{\roman{enumi}}%
+  \renewcommand{\labelenumi}{\upshape(\theenumi)}%
+  \begin{enumerate}
+}{%
+  \end{enumerate}}
+
+\title{Network variability in Midnight data}
+\author{Isaura Oliver}
+\date{\today}
+
+
+\begin{document}
+
+
+\maketitle 	
+
+\begin{abstract}
+
+Resting-state fMRI networks such as the default-mode network (DMN) and the fronto parietal network (FPN) are typically identified and analyzed based on concatenated data sets over numerous subjects. In here, we take high resolution fMRI data, \cite{Gordon2017}, that allow us study on individual level the subjects to find the backbone network the subjects infer. In this paper we address the questions of (i) how robust the identification of the "average" effective network structure is, and (ii) how much the effective structure within these networks varies from patient to patient. Using a novel fMRI data set with high resolution recordings, \cite{Gordon2017}. We focus the analysis on the inferring methods Cross Correlation (CC), Partial Correlation (PC), and Maximum Entropy Conditioning Mutual Information (MECMI) to infer the effective networks. 
+\textbf{Regarding (i) we find that CC and PC networks highly dependent of the number of links. While the backbone network is robust, when we increment the number of links, and thus not only analyzing the backbone, we lose the robustness and the ability of the subjects on infer the average network. 
+The length of the recordings also matters on robustness, while concatenating the data sets leads to a correct inferring of the average subject networks, slicing the recordings down to 5 minutes we notice a loss in the robustness and in the ability of correctly inferring the average subject network.
+}%the limitation of the degree and temporal size of the data not always allow to find a common average subject network. While limiting PC and CC to an specific degree when comparing each average subject network against each other allows to identify a less variable structure, in the case of subject network vs recordings the structure can differ quantitatively, since the loss of resolution in the data. Also if we further limit the time-points of the \cite{Gordon2017} data the structures found aren't able to reproduce the average subject network.
+% 
+% subject vs subject allow to find common structure
+% subject vs recordings more difficulty 
+% used: link analysis  
+% The limitation of number of links matters:
+% When taking 5 we are able to recuparate the subject network, while taking 25 links decreases the recuparation, while full network analysis allow us to find a similar subject network.
+\textbf{Regarding (ii) we found that average subject networks have similar structure and the same when the average subject network and the subject-recording networks are compared. Since in neither of the three methods for inferring the network show much variability or differences in the structure of the average networ of DMN and FPN against the average subject network, in the case of treating the two networks together there is not much variability we find differences in the structure. While comparing the average subject networks with the subject recordings network neither method show differences in structure or variability.}
+% use p-r graphs  
+% DMN and FPN similar, DMN+FPN not much (loss recall in PC and CC, loss precision in MECMI)
+We also have found that the most probable pairwise connection, for the subjects in \cite{Gordon2017}, are Cingulum Posterior left with right and Frontal Inferior Opercularis (IFOper) with Frontal Inferior Triangular (IFTri).
+\end{abstract}
+
+\doublespacing
+
+\section{Introduction}
+
+%What
+
+On the study of the functional brain in resting state we can infer networks through fMRI (functional Magneto Resonance Imagining) scans. The data sets obtained are usually statistically poor significant (ref) for this fact the usual methodology is to concatenate the time-series obtained from all subjects in a study, as it has been done in (ref). But since the increase interest on understanding how the neurophysiological system works has permit the researches to find new methodologies and advance the technology on finding new ways to acquire highly statistically significant fMRI scans (Gordon, Anderson). These larger recordings has made realize that not only the diseases are able to infer differently the structure of the functional brain networks, also every single healthy subject is able to infer its own network, which is structural different from the others (Gordon). 
+The goal of this paper is to show that for two subsystems, or modules (ref), of the functional brain network, as are DMN (Default Mode Network) and FPN (Fronto Parietal Network) and the combination of both together, is to show how the individual networks inferred from the data set (Gordon) perform against the concatenate network and themselves. We want to answer if it is possible that there is a backbone that represents all the subjects.
+
+Over the past three decades the study of the brain has improve quantitatively, thanks of more accurate instrumental and new techniques we are able to record higher precision data sets and analyze with improved methods this data, which allows us a better understanding of the functional connectivity in the brain, when doing a task or in resting state.
+The functional network allow us the study and diagnostic of neurophysiological diseases, but in a subject fMRI scan the inferred network obtained, as in \cite{Gordon2017}, differs from patient to patient. 
+
+%fmri/EEG and networks
+%In macroscale the brain is able to exchange information between pairs of regions, that are not necessary connected, (rubinov, 2010), this exchange of information can be registered in functional magnetic resonance imaging (fMRI) scans, via blood oxygenation level-dependence (BOLD), or in electroencephelogram (EEG) data, via registering the electromagnetic pulses through electrodes. 
+When there is activity between two different brain regions, that can be not connected anatomically \cite{Rubinov2010},   there is a correlation in the time series for these regions, because of it we are able to infer the brain as a network that is composed of modules \cite{He2009}.
+These modules tend to use the same regions for all subjects \cite{Damoiseaux2006}, healthy (control) or diagnosed patients, are called functional networks since they are in charge of the physiology and neurological behaviour, in this case, of the human body.
+We are able to differentiate between the different types of functional networks, being the more common: Default mode network (DMN), always active but observed when a subject is in resting state, and Fronto-parietal network (FPN), observed when the subject is doing certain task. These two networks are principal studied since they are the principal affected by diseases as Alzheimer, that mainly affects the DMN and FPN networks \cite{Zanchi2018} \cite{Mohan2016}, epilepsy which affects DMN \cite{Mohan2016}, and Schizophrenia which affects FPN \cite{Ray2017}.
+
+%functional networks are assembled from estimates of statistical dependencies between neuronal or regional time series data (Sporns)
+%Functional networks
+%A complex network is as a collection of system elements called nodes, and the association between each pair of nodes called edges, or links (barabasi, 2012), it allow us to study complex systems like the brain. 
+%We can define a functional network as system with different elements that interact with each other, where the nodes are the elements and the pairwise interaction is a link. In the case of the brain the nodes are the regions and, the interaction tell us if two regions exchange information, that they are inferred through the correlations between time series of regions \cite{Sporns2016}.
+%For inferring a functional networks the most common method is called functional connectivity, or cross correlation (CC),\cite{Watanabe2013}, \cite{Fair2007}, etc. the main problem of this method is that only takes into account the linear correlations in the data, also this method is susceptible to indirect links. Another method widely used is partial correlation (PC), \cite{Watanabe2013} between others, that since conditions a pairwise in function of all others regions is able to detected the non-linearity in the data more efficiently. In this work will use these two methods of inference together with maximum entropy conditioning mutual information (MECMI), this last method, also, takes into account the non-linearity in the data and only shows the links in which we have information flow \cite{Martin2016} and \cite{Martin2017}, it have not need to threshold the networks obtained as CC and PC.
+%Inferring brain functional networks on a patient there is an intrinsic variability that makes a network different from patient to patient. 
+%%% 
+
+Functional networks obtained from inference of the activity recordings, time series, show different connectivity from one person to another, \cite{Gordon2017}.
+%\textbf{This variability exists either when we are taking all possible regions in the brain or only taking the corresponding regions for a specific functional network (as DMN, FPN, etc.). The differences in the connectivity of the regions exists either for controls and diagnosed patients.}
+Because of low statistics, in fMRI, time series data set of a set of subjects are usually concatenated for obtaining more a reliable average functional network, since fMRI scans have a sampling of 2s and have short time duration, usually around 5-7 minutes. When studying an individual subject in fMRI it shows that short timed functional networks are less stable than long timed scans which usually last around 25 minutes, \cite{Anderson2011}, as are in the case of EEG and \cite{Gordon2017}, in which for each subject there is around 5 hours of data. 
+%topology
+Even with long enough recordings there is differences in the topology of the networks inferred for each subject, as is the case of connectivity, organization or, efficiency in information transfer \cite{Gordon2017}, and overall obtaining a particular structure for each patient.
+%show that the differences between subject networks from short timed scans, where 5-7 minutes is the usual length for scans with sampling of 2s for fMRI, are less noticeable than for long time scans (around 25 minutes), as in \cite{Anderson2011} and \cite{Gordon2017} the functional networks obtained from a single long timed scan shows to be more stable networks. 
+This differences in structure are also seen when comparing networks inferred from task based data sets, for an individual patient, the differences in the connectivity of the individual functional network can be explained as in the subject has mastered the task proposed \cite{Amoruso2017}, and these functional networks show more stability in their differences than the resting-state functional networks \cite{Anderson2011}. While in the case of resting state data the differences in control functional networks could be due of not-diagnosed diseases \cite{Gordon2017}. %Although there have seen that the networks inferred can be unstable when the patient experiences drowsiness during the recording \cite{Gordon2017}, 
+
+% drowsiness equals unstable networks \cite{Gordon2017}.
+
+% the variability in controls could be due that there are neurophysiological diseases that hadn't been diagnosed but that the control could be susceptible to have. <-- Gordon
+%In the case DMN is related to diseases as Alzheimer \cite{Zanchi2018}, Parkinson's disease, epilepsy, attention deficit hyperactivity disorder \cite{Mohan2016}; and in the case of FPN since it is related to Alzheimer \cite{Zanchi2018}, Schizophrenia \cite{Ray2017}.
+Using the data sets available from \cite{Gordon2017}, and 3 different inference methods: cross correlation (CC), partial correlation (PC) and maximum entropy conditioning mutual information (MECMI) we will compare the individual functional networks with the average and the functional with each recording, for the DMN and FPN networks, for answering to the next questions:
+(i)  how robust is the identification of the average functional networks and the functional network for each patient.
+(ii) how much of the effective structure within these networks varies between patients, and in each patient how varies between the recordings.
+
+
+
+%bibliography
+%\nocite{*}
+%\inputencoding{latin2}
+\bibliography{IEEEabrv,biblio}
+%\inputencoding{uft8}
+
+\end{document}
